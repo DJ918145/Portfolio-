@@ -31,6 +31,7 @@ const testimonialsModalFunc = function () {
   overlay.classList.toggle("active");
 };
 
+
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
   testimonialsItem[i].addEventListener("click", function () {

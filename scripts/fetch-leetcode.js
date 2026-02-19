@@ -15,6 +15,7 @@ function extractRankFromHtml(html) {
   return null;
 }
 
+
 async function fetchProfileHtml(username) {
   const url = `https://leetcode.com/u/${username}/`;
   const res = await fetch(url, { method: 'GET' });
