@@ -427,6 +427,18 @@ main {
   font-size: var(--fs-7);
 }
 
+.leetcode-badge {
+  display: inline-block;
+  margin-left: 8px;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: var(--border-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  font-size: 13px;
+  font-weight: var(--fw-500);
+  border-radius: 12px;
+}
+
 .contact-info address { font-style: normal; }
 
 .social-list {

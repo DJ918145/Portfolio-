@@ -38,10 +38,10 @@ async function fetchGraphQL(username) {
   return await res.json();
 }
 
-async function main() {
+async function main(username = USERNAME) {
   let rank = null;
   try {
-    const html = await fetchProfileHtml(USERNAME);
+    const html = await fetchProfileHtml(username);
     rank = extractRankFromHtml(html);
   } catch (e) {
     console.warn('HTML fetch failed:', e.message);
@@ -49,7 +49,7 @@ async function main() {
 
   if (!rank) {
     try {
-      const data = await fetchGraphQL(USERNAME);
+      const data = await fetchGraphQL(username);
       if (data && data.data && data.data.matchedUser && data.data.matchedUser.submitStats) {
         const arr = data.data.matchedUser.submitStats.acSubmissionNum || [];
         const all = arr.find(a => a.difficulty && a.difficulty.toLowerCase() === 'all');
@@ -75,9 +75,14 @@ async function main() {
   }
   fs.writeFileSync(outPath, JSON.stringify(out, null, 2), 'utf8');
   console.log('Wrote', outPath, out);
+  return out;
 }
 
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+module.exports = { fetchLeetCodeData: main };
+
+if (require.main === module) {
+  main().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
